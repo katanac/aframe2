@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>KTPC</title>
+  <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+  <script>
+    AFRAME.registerComponent('colores', {
+      schema: {
+        interval: { type: 'number', default: 5000 },
+        defaultColor: { type: 'color', default: '#fff' }
+      },
+
+      init: function () {
+        var el = this.el
+        var interval = this.data.interval
+        var colors = ["blue", "red", "yellow", "green", "orange"]
+        var color = 0
+
+        el.setAttribute('color', colors[0])
+        this.colorInterval = setInterval(function () {
+          color = (color + 1) % colors.length
+          el.setAttribute('color', colors[color])
+        }, interval)
+      },
+
+
+    })
+
+  </script>
+</head>
+
+<body>
+  <a-scene>
+    <a-sky color="#ADD7E5" />
+    </a-sky>
+
+    <a-box colores="defaultColor:#201ABD: interval:100" position="0 2 -3" rotation="120 50 0" color="blue" arc="230"
+      radius="15" />
+  </a-scene>
+</body>
+
+</html>
